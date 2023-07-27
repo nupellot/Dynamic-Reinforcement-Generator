@@ -111,7 +111,7 @@ public class PrimitiveCubeCreation : MonoBehaviour
         for (int i = 0; i < AmountOfReinforcements; i++)
         {
             NewReinforcements.Add(Instantiate(Reinforcement));
-            NewReinforcements.Last().name = "REF " + (int)(Reinforcements.Count + i);
+            NewReinforcements.Last().name = "RF " + (int)(Reinforcements.Count + i);
             NewReinforcements.Last().transform.localScale = GetRandomScale(MinScaleOfReinforcement, MaxScaleOfReinforcement);
             NewReinforcements.Last().transform.position = NewReinforcements.Last().GetComponent<Renderer>().bounds.size / 2;
             NewReinforcements.Last().transform.position += new Vector3(Random.Range(0, TheCubeSize.x), Random.Range(0, TheCubeSize.y), Random.Range(0, TheCubeSize.z));
