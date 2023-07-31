@@ -6,7 +6,11 @@ public class Destructor : MonoBehaviour
 {
     // Start is called before the first frame update
     // [SerializeField] private GameObject DirectionalLight;
-    public PrimitiveCubeCreation PrimitiveCubeCreation;
+    // public PrimitiveCubeCreation PrimitiveCubeCreation;
+
+    public delegate void MyDelegate(GameObject gameObject);
+    public static event MyDelegate OnTouch;
+    
     void Start()
     {
         
@@ -18,18 +22,30 @@ public class Destructor : MonoBehaviour
         
     }
     
-    void OnCollisionEnter(Collision col) {
-        // CarIsDeleted?.Invoke(this.gameObject);
-        // Debug.Log("Collision");
-        if (this.gameObject.CompareTag("Reinforcement") && col.gameObject.CompareTag("Reinforcement"))
-        {
-            Destroy(this.gameObject);
-            PrimitiveCubeCreation.Reinforcements.Remove(this.gameObject);
-            // PrimitiveCubeCreation.Reinforcements.Remove(this.gameObject);
-        }
-        // if (this.gameObject.CompareTag("Car") && col.gameObject.CompareTag("Car")) {
-        //     // Cars.Remove(this.gameObject);
-        //     Destroy(this.gameObject);
+    // void OnCollisionEnter(Collision col) {
+    //     // CarIsDeleted?.Invoke(this.gameObject);
+    //     Debug.Log("Collision");
+    //     if (this.gameObject.CompareTag("Reinforcement") && col.gameObject.CompareTag("Reinforcement"))
+    //     {
+    //         onTouch.Invoke(this.gameObject);
+    //     }
+    // }
+
+    void OnTriggerEnter(Collider other)
+    {
+        // Debug.Log("Collision " + this.gameObject.CompareTag());
+        // if (this.gameObject.CompareTag("Reinforcement") && other.gameObject.CompareTag("Reinforcement"))
+        // {
+            if (OnTouch != null)
+            {
+                Debug.Log("ЕСТЬ ПОДПЕЩИКИ");
+                OnTouch.Invoke(this.gameObject);
+            }
+            else
+            {
+                Debug.Log("НЕТ ПОДПЕЩЕКОВ");
+            }
+            
         // }
     }
 }

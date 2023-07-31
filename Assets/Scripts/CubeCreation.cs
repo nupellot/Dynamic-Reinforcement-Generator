@@ -47,4 +47,6 @@ public class CubeCreation : MonoBehaviour
         //     Quaternion.Euler(random.Next(0,90),random.Next(0,90), random.Next(0,90))
         // );
     }
+
+
 }
