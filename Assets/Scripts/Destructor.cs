@@ -34,8 +34,8 @@ public class Destructor : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // Debug.Log("Collision " + this.gameObject.CompareTag());
-        // if (this.gameObject.CompareTag("Reinforcement") && other.gameObject.CompareTag("Reinforcement"))
-        // {
+        if (this.gameObject.CompareTag("Reinforcement") && other.gameObject.CompareTag("Reinforcement"))
+        {
             if (OnTouch != null)
             {
                 Debug.Log("ЕСТЬ ПОДПЕЩИКИ");
@@ -46,6 +46,6 @@ public class Destructor : MonoBehaviour
                 Debug.Log("НЕТ ПОДПЕЩЕКОВ");
             }
             
-        // }
+        }
     }
 }
