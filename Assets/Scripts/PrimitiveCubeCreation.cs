@@ -1,9 +1,8 @@
 
 using System.Collections.Generic;
-// using System.Diagnostics;
-// using System.Diagnostics;
 using UnityEngine;
 using System.Linq;
+using NUnit.Framework.Constraints;
 // using System.Numerics;
 using UnityEngine.UI;
 
@@ -18,9 +17,21 @@ public class PrimitiveCubeCreation : MonoBehaviour
     [SerializeField] private Vector3 MaxScaleOfReinforcement = Vector3.one;
     [SerializeField] private int AmountOfReinforcements = 100;
     
-    
+    public void IsIntersectionAllowed(bool isIntersectionAllowed)
+    {
+        if (isIntersectionAllowed)
+        {
+            Debug.Log("Разрешили пересечения");
+            Destructor.OnTouch -= DestroyReinforcement;
+        } else if (!isIntersectionAllowed)
+        {
+            Debug.Log("Запретили пересечения");
+            Destructor.OnTouch += DestroyReinforcement;
+        }
+    }
+
     private GameObject TheCube;
-    public List<GameObject> Reinforcements = new List<GameObject>();
+    private List<GameObject> Reinforcements = new List<GameObject>();
     System.Random random = new System.Random();
     
     // Start is called before the first frame update
@@ -28,20 +39,22 @@ public class PrimitiveCubeCreation : MonoBehaviour
     {
         // Спавним главный куб (Рабочий Объем, который мы будем армировать).
         TheCube = GameObject.Find("VolumetricCube");
-        Destructor.OnTouch += DestroyReinforcement;
-        Reinforcements = SpawnReinforcement(SphereSource, AmountOfReinforcements, MinScaleOfReinforcement, MaxScaleOfReinforcement);
-        Debug.Log("Jopa");
+        // Destructor.OnTouch += DestroyReinforcement;
+        Reinforcements = SpawnReinforcements(SphereSource, 
+                                                        AmountOfReinforcements, 
+                                                        MinScaleOfReinforcement, 
+                                                        MaxScaleOfReinforcement
+        );
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         while (Reinforcements.Count != AmountOfReinforcements)
         {
             if (Reinforcements.Count < AmountOfReinforcements)
             {
-                List<GameObject> NewReinforcements = SpawnReinforcement(
+                List<GameObject> NewReinforcements = SpawnReinforcements(
                     SphereSource,
                     AmountOfReinforcements - Reinforcements.Count,
                     MinScaleOfReinforcement,
@@ -76,7 +89,7 @@ public class PrimitiveCubeCreation : MonoBehaviour
     }
 
 
-    List<GameObject> SpawnReinforcement(GameObject Reinforcement, int AmountOfReinforcements,
+    List<GameObject> SpawnReinforcements(GameObject Reinforcement, int AmountOfReinforcements,
         Vector3 MinScaleOfReinforcement, Vector3 MaxScaleOfReinforcement)
     {
         List<GameObject> NewReinforcements = new List<GameObject>();
@@ -90,9 +103,11 @@ public class PrimitiveCubeCreation : MonoBehaviour
         {
             NewReinforcements.Add(Instantiate(Reinforcement));
             NewReinforcements.Last().name = "RF " + (int)(Reinforcements.Count + i);
-            NewReinforcements.Last().transform.localScale = GetRandomScale(MinScaleOfReinforcement, MaxScaleOfReinforcement);
+            NewReinforcements.Last().transform.localScale = GetRandomVector3(MinScaleOfReinforcement, MaxScaleOfReinforcement);
             NewReinforcements.Last().transform.position = NewReinforcements.Last().GetComponent<Renderer>().bounds.size / 2;
-            NewReinforcements.Last().transform.position += new Vector3(Random.Range(0, TheCubeSize.x), Random.Range(0, TheCubeSize.y), Random.Range(0, TheCubeSize.z));
+            Vector3 Position = GetRandomVector3(Vector3.zero,
+                TheCubeSize - NewReinforcements.Last().GetComponent<Renderer>().bounds.size);
+            NewReinforcements.Last().transform.position += Position;
 
         }
 
@@ -100,9 +115,9 @@ public class PrimitiveCubeCreation : MonoBehaviour
     }
     
 
-    Vector3 GetRandomScale(Vector3 MinScale, Vector3 MaxScale)
+    Vector3 GetRandomVector3(Vector3 MinVector, Vector3 MaxVector)
     {
-        return new Vector3(Random.Range(MinScale.x, MaxScale.x), Random.Range(MinScale.y, MaxScale.y),
-            Random.Range(MinScale.z, MaxScale.z));
+        return new Vector3(Random.Range(MinVector.x, MaxVector.x), Random.Range(MinVector.y, MaxVector.y),
+            Random.Range(MinVector.z, MaxVector.z));
     }
 }

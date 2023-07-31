@@ -22,30 +22,13 @@ public class Destructor : MonoBehaviour
         
     }
     
-    // void OnCollisionEnter(Collision col) {
-    //     // CarIsDeleted?.Invoke(this.gameObject);
-    //     Debug.Log("Collision");
-    //     if (this.gameObject.CompareTag("Reinforcement") && col.gameObject.CompareTag("Reinforcement"))
-    //     {
-    //         onTouch.Invoke(this.gameObject);
-    //     }
-    // }
 
     void OnTriggerEnter(Collider other)
     {
         // Debug.Log("Collision " + this.gameObject.CompareTag());
         if (this.gameObject.CompareTag("Reinforcement") && other.gameObject.CompareTag("Reinforcement"))
         {
-            if (OnTouch != null)
-            {
-                Debug.Log("ЕСТЬ ПОДПЕЩИКИ");
-                OnTouch.Invoke(this.gameObject);
-            }
-            else
-            {
-                Debug.Log("НЕТ ПОДПЕЩЕКОВ");
-            }
-            
+            OnTouch?.Invoke(this.gameObject);
         }
     }
 }
