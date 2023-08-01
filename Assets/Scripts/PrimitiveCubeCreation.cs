@@ -16,7 +16,7 @@ public class PrimitiveCubeCreation : MonoBehaviour
     [SerializeField] private Vector3 MinScaleOfReinforcement = Vector3.one;
     [SerializeField] private Vector3 MaxScaleOfReinforcement = Vector3.one;
     [SerializeField] private int AmountOfReinforcements = 100;
-    
+
     public void IsIntersectionAllowed(bool isIntersectionAllowed)
     {
         if (isIntersectionAllowed)

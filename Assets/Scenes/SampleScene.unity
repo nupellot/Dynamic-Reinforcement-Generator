@@ -316,11 +316,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TheCubeSource: {fileID: 881553504534293557, guid: bb765aa0c4ea67f4b87ac8d1b5086440, type: 3}
-  SphereSource: {fileID: 8762342996859606166, guid: a1ff2fe75c4298d44be5eedb9601dd6f, type: 3}
+  SphereSource: {fileID: 7972293529879355131, guid: 2e0b24e2921065146810ce321c0a202b, type: 3}
   TheCubeScale: {x: 50, y: 50, z: 50}
   SphereScale: {x: 5, y: 5, z: 5}
   MinScaleOfReinforcement: {x: 1, y: 1, z: 1}
-  MaxScaleOfReinforcement: {x: 6, y: 6, z: 6}
+  MaxScaleOfReinforcement: {x: 1, y: 1, z: 1}
   AmountOfReinforcements: 100
 --- !u!1 &583742936
 GameObject:
