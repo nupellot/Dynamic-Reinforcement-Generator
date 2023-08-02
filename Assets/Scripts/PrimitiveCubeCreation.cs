@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+// using System.Numerics;
 using NUnit.Framework.Constraints;
 // using System.Numerics;
 using UnityEngine.UI;
@@ -104,6 +105,7 @@ public class PrimitiveCubeCreation : MonoBehaviour
             NewReinforcements.Add(Instantiate(Reinforcement));
             NewReinforcements.Last().name = "RF " + (int)(Reinforcements.Count + i);
             NewReinforcements.Last().transform.localScale = GetRandomVector3(MinScaleOfReinforcement, MaxScaleOfReinforcement);
+            NewReinforcements.Last().transform.rotation = Quaternion.Euler(GetRandomVector3(Vector3.zero, new Vector3(360, 360, 360)));
             NewReinforcements.Last().transform.position = NewReinforcements.Last().GetComponent<Renderer>().bounds.size / 2;
             Vector3 Position = GetRandomVector3(Vector3.zero,
                 TheCubeSize - NewReinforcements.Last().GetComponent<Renderer>().bounds.size);
