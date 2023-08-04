@@ -700,7 +700,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 51
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -725,14 +725,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.1559546, y: -0.6455733, z: 0.13698968, w: 0.734947}
-  m_LocalPosition: {x: 97.67, y: 53.59, z: -3.84}
+  m_LocalRotation: {x: 0.16843769, y: -0.58240014, z: 0.12490365, w: 0.7853903}
+  m_LocalPosition: {x: 98.3, y: 55.7, z: -17.2}
   m_LocalScale: {x: 0.48895508, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 23.961, y: -82.592, z: 0}
+  m_LocalEulerAnglesHint: {x: 24.209, y: -73.117, z: 0}
 --- !u!1 &975240207 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5779719524295056757, guid: 2ef89da18c2861345b4cffb2119dabf8, type: 3}
@@ -1012,10 +1012,10 @@ RectTransform:
   m_Father: {fileID: 2004545091}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -20}
-  m_SizeDelta: {x: 160, y: 20}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 110, y: -50}
+  m_SizeDelta: {x: 200, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1241531263
 MonoBehaviour:
