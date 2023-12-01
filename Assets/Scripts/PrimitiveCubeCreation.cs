@@ -16,19 +16,6 @@ public class PrimitiveCubeCreation : MonoBehaviour
     [SerializeField] private Vector3 maxScaleOfReinforcement = Vector3.one;
     [SerializeField] private int amountOfReinforcements = 100;
 
-    public void IsIntersectionAllowed(bool isIntersectionAllowed)
-    {
-        if (isIntersectionAllowed)
-        {
-            Debug.Log("Разрешили пересечения");
-            Destructor.OnTouch -= DestroyReinforcement;
-        } else if (!isIntersectionAllowed)
-        {
-            Debug.Log("Запретили пересечения");
-            Destructor.OnTouch += DestroyReinforcement;
-        }
-    }
-
     private GameObject TheCube;
     private List<GameObject> Reinforcements = new List<GameObject>();
     System.Random random = new System.Random();
@@ -76,6 +63,57 @@ public class PrimitiveCubeCreation : MonoBehaviour
         
     }
 
+
+    List<GameObject> spawnReinforcements(
+        GameObject Reinforcement, 
+        int AmountOfReinforcements,
+        Vector3 MinScaleOfReinforcement, 
+        Vector3 MaxScaleOfReinforcement
+        )
+    {
+        List<GameObject> NewReinforcements = new List<GameObject>();
+
+        // Vector3 SphereSize = SphereSource.GetComponent<Renderer>().bounds.size;
+        Vector3 TheCubeSize = TheCube.GetComponent<Renderer>().bounds.size;
+        Vector3 spawnPoint = TheCube.GetComponent<Transform>().position - TheCubeSize / 2;
+        // Vector3 CubeToSphere = new Vector3(TheCubeSize.x / SphereSize.x, TheCubeSize.y / SphereSize.y,
+        //     TheCubeSize.z / SphereSize.z);
+
+        for (int i = 0; i < AmountOfReinforcements; i++)
+        {
+            NewReinforcements.Add(Instantiate(Reinforcement));
+            NewReinforcements.Last().name = "RF " + (int)(Reinforcements.Count + i);
+            NewReinforcements.Last().transform.localScale = GetRandomVector3(MinScaleOfReinforcement, MaxScaleOfReinforcement);
+            NewReinforcements.Last().transform.rotation = Quaternion.Euler(GetRandomVector3(Vector3.zero, new Vector3(360, 360, 360)));
+            // NewReinforcements.Last().transform.position = NewReinforcements.Last().GetComponent<Renderer>().bounds.size / 2;
+            NewReinforcements.Last().transform.position = spawnPoint;
+            NewReinforcements.Last().transform.position -= NewReinforcements.Last().GetComponent<Renderer>().bounds.size / 2;
+            Vector3 Position = GetRandomVector3(
+                Vector3.zero,
+                TheCubeSize
+            );
+            NewReinforcements.Last().transform.position += Position;
+            
+
+        }
+
+        return NewReinforcements;
+    }
+    
+    
+    public void IsIntersectionAllowed(bool isIntersectionAllowed)
+    {
+        if (isIntersectionAllowed)
+        {
+            Debug.Log("Разрешили пересечения");
+            Destructor.OnTouch -= DestroyReinforcement;
+        } else if (!isIntersectionAllowed)
+        {
+            Debug.Log("Запретили пересечения");
+            Destructor.OnTouch += DestroyReinforcement;
+        }
+    }
+    
     void DestroyReinforcement(GameObject Reinforcement)
     {
         Debug.Log("Destroying " + Reinforcement.name);
@@ -87,34 +125,6 @@ public class PrimitiveCubeCreation : MonoBehaviour
     {
         amountOfReinforcements = (int)sl.value;
     }
-
-
-    List<GameObject> spawnReinforcements(GameObject Reinforcement, int AmountOfReinforcements,
-        Vector3 MinScaleOfReinforcement, Vector3 MaxScaleOfReinforcement)
-    {
-        List<GameObject> NewReinforcements = new List<GameObject>();
-
-        // Vector3 SphereSize = SphereSource.GetComponent<Renderer>().bounds.size;
-        Vector3 TheCubeSize = TheCube.GetComponent<Renderer>().bounds.size;
-        // Vector3 CubeToSphere = new Vector3(TheCubeSize.x / SphereSize.x, TheCubeSize.y / SphereSize.y,
-        //     TheCubeSize.z / SphereSize.z);
-
-        for (int i = 0; i < AmountOfReinforcements; i++)
-        {
-            NewReinforcements.Add(Instantiate(Reinforcement));
-            NewReinforcements.Last().name = "RF " + (int)(Reinforcements.Count + i);
-            NewReinforcements.Last().transform.localScale = GetRandomVector3(MinScaleOfReinforcement, MaxScaleOfReinforcement);
-            NewReinforcements.Last().transform.rotation = Quaternion.Euler(GetRandomVector3(Vector3.zero, new Vector3(360, 360, 360)));
-            NewReinforcements.Last().transform.position = NewReinforcements.Last().GetComponent<Renderer>().bounds.size / 2;
-            Vector3 Position = GetRandomVector3(Vector3.zero,
-                TheCubeSize - NewReinforcements.Last().GetComponent<Renderer>().bounds.size);
-            NewReinforcements.Last().transform.position += Position;
-
-        }
-
-        return NewReinforcements;
-    }
-    
 
     Vector3 GetRandomVector3(Vector3 MinVector, Vector3 MaxVector)
     {
