@@ -22,8 +22,8 @@ public class CubeCreation : MonoBehaviour
         volumetricCube = Instantiate(volumetricCubeSource, new Vector3(0, 0, 0), Quaternion.identity);
         volumetricCube.transform.position -= volumetricCube.GetComponent<Renderer>().bounds.size / 2;
         
-        Debug.Log(volumetricCube.GetComponent<Renderer>().bounds.size);
-        Debug.Log(volumetricCube.GetComponent<Renderer>().bounds.size.x);
+        // Debug.Log(volumetricCube.GetComponent<Renderer>().bounds.size);
+        // Debug.Log(volumetricCube.GetComponent<Renderer>().bounds.size.x);
         
         // reinforcingSphere.GetComponent<Transform>().localScale = new Vector3(10, 10, 10);
         Instantiate(reinforcingSphere,

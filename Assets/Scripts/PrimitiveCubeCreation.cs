@@ -4,19 +4,17 @@ using UnityEngine;
 using System.Linq;
 // using System.Numerics;
 using NUnit.Framework.Constraints;
+using UnityEngine.Serialization;
 // using System.Numerics;
 using UnityEngine.UI;
 
 
 public class PrimitiveCubeCreation : MonoBehaviour
 {
-    [SerializeField] private GameObject TheCubeSource;
-    [SerializeField] private GameObject SphereSource;
-    [SerializeField] private Vector3 TheCubeScale = new Vector3(50, 50, 50);
-    [SerializeField] private Vector3 SphereScale = new Vector3(5, 5, 5);
-    [SerializeField] private Vector3 MinScaleOfReinforcement = Vector3.one;
-    [SerializeField] private Vector3 MaxScaleOfReinforcement = Vector3.one;
-    [SerializeField] private int AmountOfReinforcements = 100;
+    [SerializeField] private GameObject reinforcementSource;
+    [SerializeField] private Vector3 minScaleOfReinforcement = Vector3.one;
+    [SerializeField] private Vector3 maxScaleOfReinforcement = Vector3.one;
+    [SerializeField] private int amountOfReinforcements = 100;
 
     public void IsIntersectionAllowed(bool isIntersectionAllowed)
     {
@@ -41,33 +39,34 @@ public class PrimitiveCubeCreation : MonoBehaviour
         // Спавним главный куб (Рабочий Объем, который мы будем армировать).
         TheCube = GameObject.Find("VolumetricCube");
         // Destructor.OnTouch += DestroyReinforcement;
-        Reinforcements = SpawnReinforcements(SphereSource, 
-                                                        AmountOfReinforcements, 
-                                                        MinScaleOfReinforcement, 
-                                                        MaxScaleOfReinforcement
+        Reinforcements = spawnReinforcements(
+            reinforcementSource,
+            amountOfReinforcements,
+            minScaleOfReinforcement,
+            maxScaleOfReinforcement
         );
     }
 
     // Update is called once per frame
     void Update()
     {
-        while (Reinforcements.Count != AmountOfReinforcements)
+        while (Reinforcements.Count != amountOfReinforcements)
         {
-            if (Reinforcements.Count < AmountOfReinforcements)
+            if (Reinforcements.Count < amountOfReinforcements)
             {
-                List<GameObject> NewReinforcements = SpawnReinforcements(
-                    SphereSource,
-                    AmountOfReinforcements - Reinforcements.Count,
-                    MinScaleOfReinforcement,
-                    MaxScaleOfReinforcement
+                List<GameObject> newReinforcements = spawnReinforcements(
+                    reinforcementSource,
+                    amountOfReinforcements - Reinforcements.Count,
+                    minScaleOfReinforcement,
+                    maxScaleOfReinforcement
                 );
-                foreach (GameObject Reinforcement in NewReinforcements)
+                foreach (GameObject reinforcement in newReinforcements)
                 {
-                    Reinforcements.Add(Reinforcement);
+                    Reinforcements.Add(reinforcement);
                 }
             }
             else
-            if (Reinforcements.Count > AmountOfReinforcements)
+            if (Reinforcements.Count > amountOfReinforcements)
             {
                 GameObject.Destroy(Reinforcements.Last());
                 Reinforcements.Remove(Reinforcements.Last());
@@ -86,11 +85,11 @@ public class PrimitiveCubeCreation : MonoBehaviour
 
     public void SetAmountFromSlider(Slider sl)
     {
-        AmountOfReinforcements = (int)sl.value;
+        amountOfReinforcements = (int)sl.value;
     }
 
 
-    List<GameObject> SpawnReinforcements(GameObject Reinforcement, int AmountOfReinforcements,
+    List<GameObject> spawnReinforcements(GameObject Reinforcement, int AmountOfReinforcements,
         Vector3 MinScaleOfReinforcement, Vector3 MaxScaleOfReinforcement)
     {
         List<GameObject> NewReinforcements = new List<GameObject>();
