@@ -118,11 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18dd3d4c8f66cfa40a351615ea9c0c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TheCubeSource: {fileID: 881553504534293557, guid: bb765aa0c4ea67f4b87ac8d1b5086440, type: 3}
-  SphereSource: {fileID: 8762342996859606166, guid: a1ff2fe75c4298d44be5eedb9601dd6f, type: 3}
-  TheCubeScale: {x: 50, y: 50, z: 50}
-  SphereScale: {x: 5, y: 5, z: 5}
-  MinScaleOfReinforcement: {x: 1, y: 1, z: 1}
-  MaxScaleOfReinforcement: {x: 1, y: 1, z: 1}
-  AmountOfReinforcements: 100
-  Reinforcements: []
+  reinforcementSource: {fileID: 0}
+  minScaleOfReinforcement: {x: 1, y: 1, z: 1}
+  maxScaleOfReinforcement: {x: 1, y: 1, z: 1}
+  amountOfReinforcements: 100

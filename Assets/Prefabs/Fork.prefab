@@ -101,7 +101,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -208,7 +208,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -315,7 +315,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -331,7 +331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2021712563866711611}
   - component: {fileID: 5526990376682027738}
-  - component: {fileID: 5879661918583601757}
+  - component: {fileID: 541144194291662797}
   m_Layer: 0
   m_Name: Fork
   m_TagString: Reinforcement
@@ -347,7 +347,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7972293529879355131}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4136636, y: 206.47554, z: 147.54477}
+  m_LocalPosition: {x: 1.64, y: 206.196, z: 147.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -399,7 +399,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5879661918583601757
+--- !u!64 &541144194291662797
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -414,10 +414,10 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}

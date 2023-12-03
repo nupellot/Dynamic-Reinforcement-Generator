@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -7,6 +8,7 @@ using NUnit.Framework.Constraints;
 using UnityEngine.Serialization;
 // using System.Numerics;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 
 public class PrimitiveCubeCreation : MonoBehaviour
@@ -26,6 +28,7 @@ public class PrimitiveCubeCreation : MonoBehaviour
         // Спавним главный куб (Рабочий Объем, который мы будем армировать).
         TheCube = GameObject.Find("VolumetricCube");
         // Destructor.OnTouch += DestroyReinforcement;
+        SetAmountFromSlider(GameObject.Find("AmountOfReinforcementsSlider").GetComponent<Slider>());
         Reinforcements = spawnReinforcements(
             reinforcementSource,
             amountOfReinforcements,
@@ -83,23 +86,93 @@ public class PrimitiveCubeCreation : MonoBehaviour
         {
             NewReinforcements.Add(Instantiate(Reinforcement));
             NewReinforcements.Last().name = "RF " + (int)(Reinforcements.Count + i);
+            
+            
             NewReinforcements.Last().transform.localScale = GetRandomVector3(MinScaleOfReinforcement, MaxScaleOfReinforcement);
             NewReinforcements.Last().transform.rotation = Quaternion.Euler(GetRandomVector3(Vector3.zero, new Vector3(360, 360, 360)));
-            // NewReinforcements.Last().transform.position = NewReinforcements.Last().GetComponent<Renderer>().bounds.size / 2;
+            NewReinforcements.Last().transform.position = NewReinforcements.Last().GetComponent<Renderer>().bounds.size / 2;
+            
             NewReinforcements.Last().transform.position = spawnPoint;
+            
             NewReinforcements.Last().transform.position -= NewReinforcements.Last().GetComponent<Renderer>().bounds.size / 2;
             Vector3 Position = GetRandomVector3(
-                Vector3.zero,
-                TheCubeSize
+                Vector3.zero + Vector3.one*2,
+                TheCubeSize - Vector3.one*2  
             );
-            NewReinforcements.Last().transform.position += Position;
+            NewReinforcements.Last().transform.position = spawnPoint + Position;
+            // MergeMeshes(NewReinforcements.Last());
             
+
+            //
+            // if (IsOutsideTheCube(NewReinforcements.Last()))
+            // {
+            //     // DestroyReinforcement(NewReinforcements.Last());
+            // }
 
         }
 
         return NewReinforcements;
     }
+
+
+    public void MergeMeshes(GameObject reinforcement)
+    {
+        // Получаем все MeshFilter дочерних объектов
+        MeshFilter[] meshFilters = reinforcement.GetComponentsInChildren<MeshFilter>();
+
+        // Создаем массив CombineInstance из MeshFilter компонентов
+        CombineInstance[] combineInstances = new CombineInstance[meshFilters.Length];
+
+        for (int i = 0; i < meshFilters.Length; i++)
+        {
+            combineInstances[i].mesh = meshFilters[i].sharedMesh;
+            combineInstances[i].transform = meshFilters[i].transform.localToWorldMatrix;
+        }
+
+        // Создаем новый пустой объект
+        // GameObject combinedObject = new GameObject("CombinedMesh");
+
+        // Добавляем MeshFilter и MeshRenderer
+        MeshFilter meshFilter = reinforcement.AddComponent<MeshFilter>();
+        MeshRenderer meshRenderer = reinforcement.AddComponent<MeshRenderer>();
+
+        // Создаем новый меш и объединяем в него меши
+        Mesh combinedMesh = new Mesh();
+        combinedMesh.CombineMeshes(combineInstances, true, true);
+
+        // Назначаем меш и материал
+        meshFilter.sharedMesh = combinedMesh;
+        // meshRenderer.sharedMaterial = meshFilters[0].GetComponent<Renderer>().sharedMaterial;
+
+        
+        
+    }
     
+    public bool IsOutsideTheCube(GameObject Reinforcement)
+    {
+        Bounds reinforcementBounds = Reinforcement.GetComponent<MeshFilter>().sharedMesh.bounds;
+        Bounds theCubeBounds = TheCube.GetComponent<Renderer>().bounds;
+
+        Debug.Log("Границы reinforcement: " + reinforcementBounds.min + " -> " + reinforcementBounds.max);
+        // Debug.Log("Границы reinforcement: " + Reinforcement.GetComponent<Renderer>().bounds + " -> " + reinforcementBounds.max);
+        Debug.Log("Границы TheCube: " + theCubeBounds.min + " -> " + theCubeBounds.max);
+        
+        if (reinforcementBounds.max.x > theCubeBounds.max.x ||
+            reinforcementBounds.max.y > theCubeBounds.max.y ||
+            reinforcementBounds.max.z > theCubeBounds.max.z ||
+            
+            reinforcementBounds.min.x < theCubeBounds.min.x ||
+            reinforcementBounds.min.y < theCubeBounds.min.y ||
+            reinforcementBounds.min.z < theCubeBounds.min.z
+            )
+        {
+            Debug.Log("Вывалился за границы");
+            return true;
+        }
+
+        return false;
+
+    }
     
     public void IsIntersectionAllowed(bool isIntersectionAllowed)
     {
