@@ -229,10 +229,10 @@ RectTransform:
   m_Father: {fileID: 1241531262}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.25}
-  m_AnchorMax: {x: 1, y: 0.75}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_SizeDelta: {x: -20, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &429766664
 GameObject:
@@ -315,13 +315,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18dd3d4c8f66cfa40a351615ea9c0c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TheCubeSource: {fileID: 881553504534293557, guid: bb765aa0c4ea67f4b87ac8d1b5086440, type: 3}
-  SphereSource: {fileID: 7972293529879355131, guid: 2e0b24e2921065146810ce321c0a202b, type: 3}
-  TheCubeScale: {x: 50, y: 50, z: 50}
-  SphereScale: {x: 5, y: 5, z: 5}
-  MinScaleOfReinforcement: {x: 1, y: 1, z: 1}
-  MaxScaleOfReinforcement: {x: 1, y: 1, z: 1}
-  AmountOfReinforcements: 100
+  reinforcementSource: {fileID: 7972293529879355131, guid: 2e0b24e2921065146810ce321c0a202b, type: 3}
+  minScaleOfReinforcement: {x: 1, y: 1, z: 1}
+  maxScaleOfReinforcement: {x: 1, y: 1, z: 1}
+  amountOfReinforcements: 100
 --- !u!1 &583742936
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,15 +409,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3831777003507531829, guid: 2ef89da18c2861345b4cffb2119dabf8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25
+      value: 19.6
       objectReference: {fileID: 0}
     - target: {fileID: 3831777003507531829, guid: 2ef89da18c2861345b4cffb2119dabf8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 25
+      value: 27.8
       objectReference: {fileID: 0}
     - target: {fileID: 3831777003507531829, guid: 2ef89da18c2861345b4cffb2119dabf8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25
+      value: 23.4
       objectReference: {fileID: 0}
     - target: {fileID: 3831777003507531829, guid: 2ef89da18c2861345b4cffb2119dabf8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -726,7 +723,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.16843769, y: -0.58240014, z: 0.12490365, w: 0.7853903}
-  m_LocalPosition: {x: 98.3, y: 55.7, z: -17.2}
+  m_LocalPosition: {x: 98.3, y: 58.885, z: -18.732}
   m_LocalScale: {x: 0.48895508, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -988,7 +985,7 @@ GameObject:
   - component: {fileID: 1241531262}
   - component: {fileID: 1241531263}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: AmountOfReinforcementsSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1012,10 +1009,10 @@ RectTransform:
   m_Father: {fileID: 2004545091}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 110, y: -50}
-  m_SizeDelta: {x: 200, y: 20}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.40024722, y: 1}
+  m_AnchoredPosition: {x: -157.5, y: 325}
+  m_SizeDelta: {x: -335, y: -730}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1241531263
 MonoBehaviour:
@@ -1062,7 +1059,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 583742937}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1000
+  m_MaxValue: 300
   m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
@@ -1107,16 +1104,16 @@ RectTransform:
   m_GameObject: {fileID: 1753252809}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.96066, y: 0.96066, z: 0.96066}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1241531262}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.25}
-  m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_SizeDelta: {x: 0, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1753252811
 MonoBehaviour:
